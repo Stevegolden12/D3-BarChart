@@ -14,16 +14,14 @@ req.onload = function () {
   var margin = { top: 20, right: 20, bottom: 70, left: 40 },
     width = 800 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
+  
+   const xScale = d3.scaleLinear()
+       .domain([d3.min(date,(d)=>d), d3.max(date,(d)=>d)])
+       .range(40, 780)
 
-  /*
-  var scale = d3.scaleLinear();
-  scale.domain([d3.min(gdp), d3.max(gdp)])
-  scale.range([40, 780])
-  */
   const yScale = d3.scaleLinear()
       .domain([d3.min(gdp, (d)=>d),d3.max(gdp, (d)=>d)])
-      .range([480, 20])  
-  
+    .range([480, 20])
  
   var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -36,12 +34,21 @@ req.onload = function () {
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("width", 20 + "px")
+    .attr("width", 2 + "px")
     .attr("height", (d) => d[1])
-    .attr("x", (d, i) => i )
+    .attr("x", (d, i) => i * 3)
     .attr("y", (d, i) => yScale(d[1]-height))
 
-  
+  const xAxis = d3.axisBottom(xScale);
+  const yAxis = d3.axisLeft(yScale);
+
+  svg.append("g")
+    .attr("transform", "translate(0, " + (height - padding) + ")")
+    .call(xAxis)
+
+  svg.append("g")
+    .attr("transform", "translate(" + padding + ", 0)")
+    .call(yAxis)
 
 
 
