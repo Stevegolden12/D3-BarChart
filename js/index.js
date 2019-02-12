@@ -26,7 +26,7 @@ req.onload = function () {
     .range([height, margin.top])
 
  
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select(".index__chartWrapper").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .style("background-color", "hsl(200,100%,90%)")
