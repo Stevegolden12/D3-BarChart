@@ -24,7 +24,6 @@ req.onload = function () {
   const yScale = d3.scaleLinear()
       .domain([d3.min(gdp,(d)=>d),d3.max(gdp, (d)=>d)])
     .range([height, margin.top])
-
  
   var svg = d3.select(".index__chartWrapper").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -48,7 +47,7 @@ req.onload = function () {
      .append("title")
      .attr("data-date", (d)=>d[0])
     .attr("class", "tooltip")
-    .text((d) => "$" + d[1])
+    .text((d) => "$" + d[1] + "T")
 
 
   const xAxis = d3.axisBottom(xScale);
